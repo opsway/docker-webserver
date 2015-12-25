@@ -4,7 +4,7 @@ set -e
 if [ -n "${HTTP_AUTH}" ];
 then
     echo "${HTTP_AUTH}" > /etc/nginx/htpasswd
-    sed -i "s/<HTTP_AUTH>/auth_basic \"Restricted\";\n auth_basic_user_file /etc/nginx/htpasswd;\n/g" /etc/nginx/conf.d/default.conf;
+    sed -i "s/<HTTP_AUTH>/auth_basic \"Restricted\";\n auth_basic_user_file \/etc\/nginx\/htpasswd;\n/g" /etc/nginx/conf.d/default.conf;
 else
     sed -i "s/<HTTP_AUTH>//g" /etc/nginx/conf.d/default.conf;
 fi

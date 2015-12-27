@@ -6,6 +6,8 @@ ADD ./default.conf /etc/nginx/conf.d/
 
 COPY docker-entrypoint.sh /entrypoint.sh
 
+RUN apt-get update
+
 RUN apt-get install -y git
 
 RUN apt-get install -y nodejs npm

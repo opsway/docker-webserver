@@ -25,4 +25,4 @@ ENTRYPOINT ["/entrypoint.sh"]
 
 CMD ["nginx", "-g", "daemon off;"]
 
-WORKDIR /var/www
+WORKDIR /var/www/current

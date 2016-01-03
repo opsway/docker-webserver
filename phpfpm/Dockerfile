@@ -32,5 +32,5 @@ COPY php.ini /usr/local/etc/php/php.ini
 
 #RUN usermod -u 501 www-data
 
-WORKDIR /var/www
+WORKDIR /var/www/current
 

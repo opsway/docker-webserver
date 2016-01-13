@@ -8,7 +8,9 @@ RUN apt-get update && apt-get install -y \
         libicu-dev \
         libpq-dev
 
-RUN docker-php-ext-install pdo iconv mcrypt gd intl mbstring pdo_mysql pdo_pgsql pgsql json zip
+RUN docker-php-ext-install pdo iconv mcrypt intl mbstring pdo_mysql pdo_pgsql pgsql json zip
+RUN docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ \
+    && docker-php-ext-install gd
 
 ENV PHPREDIS_VERSION 2.2.7
 

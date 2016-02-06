@@ -24,7 +24,7 @@ RUN curl -L -o /tmp/redis.tar.gz https://github.com/phpredis/phpredis/archive/$P
 RUN curl -L -o /tmp/xdebug.tar.gz https://github.com/xdebug/xdebug/archive/$XDEBUG_VERSION.tar.gz \
     && tar xfz /tmp/xdebug.tar.gz \
     && rm -r /tmp/xdebug.tar.gz \
-    && mv xdebug-$PHPREDIS_VERSION /usr/src/php/ext/xdebug \
+    && mv xdebug-$XDEBUG_VERSION /usr/src/php/ext/xdebug \
     && docker-php-ext-install xdebug
 
 RUN docker-php-ext-enable opcache

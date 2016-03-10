@@ -13,7 +13,7 @@ RUN docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-di
     && docker-php-ext-install gd
 
 ENV PHPREDIS_VERSION php7
-ENV XDEBUG_VERSION XDEBUG_2_4_0RC4
+ENV XDEBUG_VERSION XDEBUG_2_4_0
 
 RUN curl -L -o /tmp/redis.tar.gz https://github.com/phpredis/phpredis/archive/$PHPREDIS_VERSION.tar.gz \
     && tar xfz /tmp/redis.tar.gz \

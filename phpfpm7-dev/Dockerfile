@@ -38,8 +38,10 @@ RUN ln -s /usr/bin/nodejs /usr/bin/node
 RUN npm install -g bower
 
 COPY php.ini /usr/local/etc/php/php.ini
+COPY docker-php-ext-xdebug.ini /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
 
 #RUN usermod -u 501 www-data
 
 WORKDIR /var/www/current
 
+EXPOSE 9090

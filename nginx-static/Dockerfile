@@ -3,6 +3,7 @@ FROM nginx:1.10-alpine
 RUN apk add --update --no-cache nodejs
 RUN apk add --update --no-cache git
 RUN apk add --update --no-cache python
+RUN apk add --update --no-cache bash
 RUN npm install -g bower
 RUN npm install --global gulp-cli
 

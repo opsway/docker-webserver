@@ -1,12 +1,15 @@
-FROM php:7.0-fpm
+FROM php:7.0-fpm-alpine
 
-RUN apt-get update && apt-get install -y \
-        libfreetype6-dev \
-        libjpeg62-turbo-dev \
-        libmcrypt-dev \
-        libpng12-dev \
-        libicu-dev \
-        libpq-dev
+RUN apk upgrade --update && apk add \
+  coreutils \
+  freetype-dev \
+  libjpeg-turbo-dev \
+  libltdl \
+  libmcrypt-dev \
+  libpng-dev \
+  bash \
+  git \
+  nodejs
 
 RUN docker-php-ext-install pdo iconv mcrypt intl mbstring pdo_mysql pdo_pgsql pgsql json zip
 RUN docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ \
@@ -22,17 +25,17 @@ RUN curl -L -o /tmp/redis.tar.gz https://github.com/phpredis/phpredis/archive/$P
 
 RUN docker-php-ext-enable opcache
 
-RUN apt-get install -y git
-
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
-RUN apt-get install -y nodejs npm
-RUN ln -s /usr/bin/nodejs /usr/bin/node
 RUN npm install -g bower
 
 COPY php.ini /usr/local/etc/php/php.ini
 
+RUN rm -rf /var/cache/apk/*
+
+ENV TERM="xterm"
+
 #RUN usermod -u 501 www-data
 
-WORKDIR /var/www/current
+WORKDIR /app
 

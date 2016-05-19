@@ -9,6 +9,15 @@ else
     sed -i "s/<HTTP_AUTH>//g" /etc/nginx/conf.d/default.conf;
 fi
 
+if [ -n "${LOGGLY_PORT_514_UDP_ADDR}" ];
+then
+    sed -i "s/<ACCESS_LOG_PLACEHOLDER>/access_log syslog:server=loggly;\n/g" /etc/nginx/conf.d/default.conf;
+    sed -i "s/<ERROR_LOG_PLACEHOLDER>/error_log syslog:server=loggly;\n/g" /etc/nginx/conf.d/default.conf;
+else
+    sed -i "s/<ACCESS_LOG_PLACEHOLDER>//g" /etc/nginx/conf.d/default.conf;
+    sed -i "s/<ERROR_LOG_PLACEHOLDER>//g" /etc/nginx/conf.d/default.conf;
+fi
+
 sed -i "s/<PHPFPM_HOST>/${PHPFPM_PORT_9000_TCP_ADDR:-phpfpm}/g;s/<PHPFPM_PORT>/${PHPFPM_PORT_9000_TCP_PORT:-9000}/g" /etc/nginx/conf.d/default.conf;
 sed -i "s/<DOMAIN_PLACEHOLDER>/${DOMAIN:-boodmo.local}/g" /etc/nginx/conf.d/default.conf;
 sed -i "s/<APPLICATION_ENV>/${APPLICATION_ENV:-dev}/g" /etc/nginx/conf.d/default.conf;

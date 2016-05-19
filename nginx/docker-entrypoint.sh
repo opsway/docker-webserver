@@ -11,8 +11,8 @@ fi
 
 if [ -n "${LOGGLY_PORT_514_UDP_ADDR}" ];
 then
-    sed -i "s/<ACCESS_LOG_PLACEHOLDER>/access_log syslog:server=loggly;\n/g" /etc/nginx/conf.d/default.conf;
-    sed -i "s/<ERROR_LOG_PLACEHOLDER>/error_log syslog:server=loggly;\n/g" /etc/nginx/conf.d/default.conf;
+    sed -i "s/<ACCESS_LOG_PLACEHOLDER>/access_log syslog:server=${LOGGLY_PORT_514_UDP_ADDR};\n/g" /etc/nginx/conf.d/default.conf;
+    sed -i "s/<ERROR_LOG_PLACEHOLDER>/error_log syslog:server=${LOGGLY_PORT_514_UDP_ADDR};\n/g" /etc/nginx/conf.d/default.conf;
 else
     sed -i "s/<ACCESS_LOG_PLACEHOLDER>//g" /etc/nginx/conf.d/default.conf;
     sed -i "s/<ERROR_LOG_PLACEHOLDER>//g" /etc/nginx/conf.d/default.conf;

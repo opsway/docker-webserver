@@ -7,6 +7,7 @@ RUN apk upgrade --update && apk add \
   libltdl \
   libmcrypt-dev \
   libpng-dev \
+  postgresql-dev \
   bash \
   git \
   nodejs

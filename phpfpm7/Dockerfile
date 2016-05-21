@@ -1,6 +1,6 @@
 FROM php:7.0-fpm-alpine
 
-RUN apk upgrade --update && apk add \
+RUN apk upgrade --update && apk --no-cache add \
   coreutils \
   freetype-dev \
   libjpeg-turbo-dev \
@@ -8,6 +8,8 @@ RUN apk upgrade --update && apk add \
   libmcrypt-dev \
   libpng-dev \
   postgresql-dev \
+  icu \
+  g++ \
   bash \
   git \
   nodejs
@@ -25,6 +27,8 @@ RUN curl -L -o /tmp/redis.tar.gz https://github.com/phpredis/phpredis/archive/$P
     && docker-php-ext-install redis
 
 RUN docker-php-ext-enable opcache
+
+RUN apk del g++
 
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 

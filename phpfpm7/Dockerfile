@@ -8,7 +8,7 @@ RUN apk upgrade --update && apk --no-cache add \
   libmcrypt-dev \
   libpng-dev \
   postgresql-dev \
-  icu \
+  icu-dev \
   g++ \
   bash \
   git \

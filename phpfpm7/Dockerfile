@@ -13,7 +13,8 @@ RUN apk upgrade --update && apk --no-cache add \
   bash \
   git \
   nodejs
-
+RUN apk add --no-cache --virtual .tmp-deps \
+    $PHPIZE_DEPS
 RUN docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ \
     docker-php-ext-install gd pdo iconv mcrypt intl mbstring pdo_mysql pdo_pgsql pgsql json zip
 
@@ -36,6 +37,7 @@ RUN cp /tmp/install/newrelic-$NEWRELIC_VERSION-linux-musl/daemon/newrelic-daemon
 RUN rm -Rf /tmp/install
 
 RUN apk del g++
+RUN apk del .build-deps
 
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 

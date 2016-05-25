@@ -16,7 +16,7 @@ RUN apk upgrade --update && apk --no-cache add \
 RUN apk add --no-cache --virtual .tmp-deps \
     $PHPIZE_DEPS
 RUN docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ \
-    docker-php-ext-install gd pdo iconv mcrypt intl mbstring pdo_mysql pdo_pgsql pgsql json zip
+    && docker-php-ext-install gd pdo iconv mcrypt intl mbstring pdo_mysql pdo_pgsql pgsql json zip
 
 ENV PHPREDIS_VERSION php7
 ENV NEWRELIC_VERSION php5-6.3.0.161

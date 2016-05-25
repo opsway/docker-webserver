@@ -38,7 +38,7 @@ RUN cp /tmp/install/newrelic-$NEWRELIC_VERSION-linux-musl/daemon/newrelic-daemon
 RUN rm -Rf /tmp/install
 
 RUN apk del g++
-RUN apk del .build-deps
+RUN apk del .tmp-deps
 
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 

@@ -40,6 +40,7 @@ RUN rm -Rf /tmp/install
 RUN apk del g++
 RUN apk del .tmp-deps
 RUN apk add --no-cache binutils
+RUN apk add --no-cache unrar
 
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 

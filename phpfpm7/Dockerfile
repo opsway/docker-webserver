@@ -19,7 +19,7 @@ RUN docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-di
     && docker-php-ext-install gd pdo iconv mcrypt intl mbstring pdo_mysql pdo_pgsql pgsql json zip
 
 ENV PHPREDIS_VERSION php7
-ENV NEWRELIC_VERSION php5-6.3.0.161
+ENV NEWRELIC_VERSION php5-6.4.0.163
 
 RUN curl -L -o /tmp/redis.tar.gz https://github.com/phpredis/phpredis/archive/$PHPREDIS_VERSION.tar.gz \
     && tar xfz /tmp/redis.tar.gz \

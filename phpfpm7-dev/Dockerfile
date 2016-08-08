@@ -15,16 +15,16 @@ RUN docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-di
 ENV PHPREDIS_VERSION php7
 ENV XDEBUG_VERSION XDEBUG_2_4_1
 
-RUN curl -L -o /tmp/redis.tar.gz https://github.com/phpredis/phpredis/archive/$PHPREDIS_VERSION.tar.gz \
+RUN curl -L -o /tmp/redis.tar.gz "https://github.com/phpredis/phpredis/archive/$PHPREDIS_VERSION.tar.gz" \
     && tar xfz /tmp/redis.tar.gz \
     && rm -r /tmp/redis.tar.gz \
-    && mv phpredis-$PHPREDIS_VERSION /usr/src/php/ext/redis \
+    && mv "phpredis-$PHPREDIS_VERSION" /usr/src/php/ext/redis \
     && docker-php-ext-install redis
 
-RUN curl -L -o /tmp/xdebug.tar.gz https://github.com/xdebug/xdebug/archive/$XDEBUG_VERSION.tar.gz \
+RUN curl -L -o /tmp/xdebug.tar.gz "https://github.com/xdebug/xdebug/archive/$XDEBUG_VERSION.tar.gz" \
     && tar xfz /tmp/xdebug.tar.gz \
     && rm -r /tmp/xdebug.tar.gz \
-    && mv xdebug-$XDEBUG_VERSION /usr/src/php/ext/xdebug \
+    && mv "xdebug-$XDEBUG_VERSION" /usr/src/php/ext/xdebug \
     && docker-php-ext-install xdebug
 
 RUN docker-php-ext-enable opcache

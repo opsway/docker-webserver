@@ -19,16 +19,30 @@ RUN docker-php-source extract \
     && cd /tmp && curl -L -o /tmp/redis.tar.gz "https://github.com/phpredis/phpredis/archive/$PHPREDIS_VERSION.tar.gz" \
     && tar xfz /tmp/redis.tar.gz \
     && rm -r /tmp/redis.tar.gz \
-    && mv "/tmp/phpredis-$PHPREDIS_VERSION" /usr/src/php/ext/redis \
-    && docker-php-ext-install redis \
+    && ( \
+            cd "/tmp/phpredis-$PHPREDIS_VERSION" \
+            && phpize \
+            && ./configure \
+            && make -j$(nproc) \
+            && make install \
+        ) \
+    && docker-php-ext-enable redis \
+    && rm -Rf "/tmp/phpredis-$PHPREDIS_VERSION" \
     && docker-php-source delete
 
 RUN docker-php-source extract \
     && cd /tmp && curl -L -o /tmp/xdebug.tar.gz "https://github.com/xdebug/xdebug/archive/$XDEBUG_VERSION.tar.gz" \
     && tar xfz /tmp/xdebug.tar.gz \
     && rm -r /tmp/xdebug.tar.gz \
-    && mv "/tmp/xdebug-$XDEBUG_VERSION" /usr/src/php/ext/xdebug \
-    && docker-php-ext-install xdebug \
+    && ( \
+           cd "/tmp/xdebug-$XDEBUG_VERSION" \
+           && phpize \
+           && ./configure \
+           && make -j$(nproc) \
+           && make install \
+       ) \
+    && docker-php-ext-enable xdebug \
+    && rm "/tmp/xdebug-$XDEBUG_VERSION"
     && docker-php-source delete
 
 RUN docker-php-ext-enable opcache

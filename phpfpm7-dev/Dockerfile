@@ -42,7 +42,7 @@ RUN docker-php-source extract \
            && make install \
        ) \
     && docker-php-ext-enable xdebug \
-    && rm "/tmp/xdebug-$XDEBUG_VERSION"
+    && rm -Rf "/tmp/xdebug-$XDEBUG_VERSION"
     && docker-php-source delete
 
 RUN docker-php-ext-enable opcache

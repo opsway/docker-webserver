@@ -38,13 +38,13 @@ RUN docker-php-source extract \
 
 RUN docker-php-ext-enable opcache
 
-RUN mkdir -p /tmp/install
-RUN cd /tmp/install && wget "https://download.newrelic.com/php_agent/release/newrelic-$NEWRELIC_VERSION-linux-musl.tar.gz" && \
-    tar -xzvf "newrelic-$NEWRELIC_VERSION-linux-musl.tar.gz"
-
-RUN cd $(php -r 'echo ini_get("extension_dir");') && cp "/tmp/install/newrelic-$NEWRELIC_VERSION-linux-musl/agent/x64/newrelic-20151012.so" newrelic.so
-RUN cp "/tmp/install/newrelic-$NEWRELIC_VERSION-linux-musl/daemon/newrelic-daemon.x64" /usr/bin/newrelic-daemon && chmod 0755 /usr/bin/newrelic-daemon
-RUN rm -Rf /tmp/install
+RUN mkdir -p /tmp/install \
+    && cd /tmp/install \
+    && curl -L -o newrelic.tar.gz "https://download.newrelic.com/php_agent/release/newrelic-$NEWRELIC_VERSION-linux-musl.tar.gz" \
+    && tar -xzvf newrelic.tar.gz \
+    && cd $(php -r 'echo ini_get("extension_dir");') && cp "/tmp/install/newrelic-$NEWRELIC_VERSION-linux-musl/agent/x64/newrelic-20151012.so" newrelic.so \
+    && cp "/tmp/install/newrelic-$NEWRELIC_VERSION-linux-musl/daemon/newrelic-daemon.x64" /usr/bin/newrelic-daemon && chmod 0755 /usr/bin/newrelic-daemon \
+    && rm -Rf /tmp/install
 
 RUN apk del g++
 RUN apk del .tmp-deps

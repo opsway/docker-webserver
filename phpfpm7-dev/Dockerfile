@@ -42,6 +42,8 @@ RUN docker-php-source extract \
            && make install \
        ) \
     && docker-php-ext-enable xdebug \
+    && docker-php-ext-install pcntl \
+    && docker-php-ext-enable pcntl \
     && rm -Rf "/tmp/xdebug-$XDEBUG_VERSION" \
     && docker-php-source delete
 

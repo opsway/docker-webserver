@@ -20,7 +20,7 @@ RUN docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-di
     && docker-php-ext-install gd pdo iconv mcrypt intl mbstring pdo_mysql pdo_pgsql pgsql json zip
 
 ENV PHPREDIS_VERSION php7
-ENV NEWRELIC_VERSION php5-6.5.0.166
+ENV NEWRELIC_VERSION php5-6.6.1.172
 
 RUN docker-php-source extract \
     && cd /tmp && curl -L -o /tmp/redis.tar.gz "https://github.com/phpredis/phpredis/archive/$PHPREDIS_VERSION.tar.gz" \
@@ -34,6 +34,8 @@ RUN docker-php-source extract \
             && make install \
         ) \
     && docker-php-ext-enable redis \
+    && docker-php-ext-install pcntl \
+    && docker-php-ext-enable pcntl \
     && rm -Rf "/tmp/phpredis-$PHPREDIS_VERSION" \
     && docker-php-source delete
 

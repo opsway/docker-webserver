@@ -2,7 +2,7 @@ FROM ilari/alpine-nginx-pagespeed:latest
 
 RUN apk add --update --no-cache bash
 
-RUN rm /etc/nginx/conf.d/default.conf
+RUN rm -f /etc/nginx/conf.d/default.conf
 
 ADD ./default.conf /etc/nginx/conf.d/
 

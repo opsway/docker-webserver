@@ -1,4 +1,4 @@
-FROM nginx:1.10-alpine
+FROM ilari/alpine-nginx-pagespeed:latest
 
 RUN apk add --update --no-cache bash
 

@@ -10,7 +10,7 @@ ENV NGINX_VERSION=1.10.1 \
 RUN set -x && \
     addgroup -S nginx \
 	&& adduser -D -S -h /var/cache/nginx -s /sbin/nologin -G nginx nginx \
-    apk --no-cache --update add \
+    && apk --no-cache --update add \
         ca-certificates \
         libuuid \
         apr \
@@ -129,7 +129,7 @@ RUN set -x && \
         --with-ld-opt="-luuid -lapr-1 -laprutil-1 -licudata -licuuc -L${SOURCE_DIR}/modpagespeed-${PAGESPEED_VERSION}/usr/lib -lpng12 -lturbojpeg -ljpeg" && \
     make && \
     make install && \
-    	&& rm -rf /etc/nginx/html/ \
+    	rm -rf /etc/nginx/html/ \
     	&& mkdir /etc/nginx/conf.d/ \
     	&& mkdir -p /usr/share/nginx/html/ \
     	&& install -m644 html/index.html /usr/share/nginx/html/ \
@@ -150,7 +150,7 @@ RUN set -x && \
     			| sort -u \
     	)" \
     	&& apk add --virtual .nginx-rundeps $runDeps \
-    apk del .build-deps && \
+    && apk del .build-deps && \
     rm -rf /tmp/* && \
     rm -rf /var/cache/apk/* && \
     ln -sf /dev/stdout /var/log/nginx/access.log && \

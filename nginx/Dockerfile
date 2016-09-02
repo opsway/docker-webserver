@@ -2,7 +2,7 @@ FROM quay.io/wunder/wunder-alpine-base
 MAINTAINER ilari.makela@wunderkraut.com
 
 ENV NGINX_VERSION=1.10.1 \
-    PAGESPEED_VERSION=1.11.33.1 \
+    PAGESPEED_VERSION=1.11.33.3 \
     SOURCE_DIR=/tmp/src \
     LIBPNG_LIB=libpng12 \
     LIBPNG_VERSION=1.2.56

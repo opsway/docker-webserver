@@ -158,7 +158,8 @@ VOLUME ["/var/log/nginx"]
 
 # Little impact in this image
 WORKDIR /app
-
+RUN mkdir -p /var/cache/nginx/pagespeed
+RUN chmod 0777 -R /var/cache/nginx/pagespeed
 EXPOSE 80 443
 
 RUN apk add --update --no-cache bash

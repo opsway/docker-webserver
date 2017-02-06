@@ -1,4 +1,4 @@
-FROM php:7.0-fpm
+FROM php:7.1-fpm
 
 RUN apt-get update && apt-get install -y \
         libfreetype6-dev \
@@ -13,7 +13,7 @@ RUN docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-di
     && docker-php-ext-install gd
 
 ENV PHPREDIS_VERSION php7
-ENV XDEBUG_VERSION XDEBUG_2_4_1
+ENV XDEBUG_VERSION XDEBUG_2_5_0
 
 RUN docker-php-source extract \
     && cd /tmp && curl -L -o /tmp/redis.tar.gz "https://github.com/phpredis/phpredis/archive/$PHPREDIS_VERSION.tar.gz" \

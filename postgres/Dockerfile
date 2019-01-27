@@ -1,4 +1,4 @@
-FROM postgres:10.3
+FROM postgres:11.1
 
 ADD setup.sh /docker-entrypoint-initdb.d/
 
